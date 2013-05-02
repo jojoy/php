@@ -1,4 +1,3 @@
-
 58:What is the use of “Final class” and can a final class be an abstract?
 The “Final” keyword is used to make the class uninheritable. So the class or it’s methods can not be overridden.
 final class Class1 {
@@ -401,3 +400,239 @@ echo count ($_POST);
 $number = 15;
 printf("%05d", $number);
 ?>
+
+28:How can we extract string "pcds.co.in " from a string "http://info@pcds.co.in using regular expression of PHP?
+  preg_match("/^http:\/\/.+@(.+)$/","http://info@pcds.co.in",$matches);
+echo $matches[1];
+
+29:How can we submit a form without a submit button?
+Java script submit() function is used for submit form without submit
+button on click call document.formname.submit()
+
+30:In how many ways we can retrieve the data in the 
+result set of MySQL using PHP?
+We can do it by 4 Ways
+1. mysql_fetch_row. , 2. mysql_fetch_array , 3. mysql_fetch_object
+4. mysql_fetch_assoc
+31:What is the difference between mysql_fetch_object and
+mysql_fetch_array?
+mysql_fetch_object() is similar tomysql_fetch_array(), with one difference -
+an object is returned, instead of an array.Indirectly, that means that
+you can only access the data by the field names, and not by their
+offsets (numbers are illegal property names).
+32:What is use of header() function in php ?
+The header() function sends a raw HTTP header to a client.We can use
+header()function for redirection of pages.It is important to notice that header() must be called before any actual output is seen..
+33: What is meant by nl2br()?
+Inserts HTML line breaks before all newlines in a string.
+34:What is htaccess? Why do we use this and Where?
+.htaccess files are configuration files of Apache Server which provide
+a way to make configuration changes on a per-directory basis. A file,containing one or more configuration directives,is placed in a particular document directory, and the directives apply to that directory, and allsubdirectories thereof. 
+35:How we get IP address of client, previous reference page etc ?
+By using $_SERVER['REMOTE_ADDR'],$_SERVER['HTTP_REFERER'] etc.
+36:What are the features and advantages of object-oriented programming?
+One of the main advantages of OO programming is its ease ofmodification; objects can easily be modified and added to a system thereby reducing maintenance costs. OO programming is also considered to bebetter at modeling the real world than is procedural programming. Itallows for more complicated and flexible interactions.
+OO systems arealso easier for non-technical personnel to understand and easier forthem to participate in the maintenance and enhancement of a systembecause it appeals to natural human cognition patterns.
+For some systems,an OO approach can speed development time since many objects are standard across systems and can be reused. Components thatmanage dates, shipping, shopping carts, etc. can be purchased and easilymodified for a specific system
+36:What are the differences between procedure-oriented languages and object-oriented languages?
+There are lot of difference between procedure language and object oriented like below
+1>Procedure language easy for new developer but complex to understand whole software as compare to object oriented model
+2>In Procedure language it is difficult to use design pattern mvc , Singleton pattern etc but in OOP you we able to develop design pattern
+3>IN OOP language we able to reuse code like Inheritance ,polymorphism etc but this type of thing not available in procedure language on that our Fonda use COPY and PASTE .
+37:What are the differences between public, private, protected,static, transient, final and volatile? 
+Public: Public declared items can be accessed everywhere.
+Protected: Protected limits access to inherited and parent
+classes (and to the class that defines the item).
+Private: Private limits visibility only to the class that defines
+the item.
+Static: A static variable exists only in a local function scope,
+but it does not lose its value when program execution leaves this scope.
+Final: Final keyword prevents child classes from overriding a
+method by prefixing the definition with final. If the class itself is
+being defined final then it cannot be extended.
+transient: A transient variable is a variable that may not
+be serialized.
+volatile: a variable that might be concurrently modified by multiple threads should be declared volatile. Variables declared to be volatile will not be optimized by the compiler because their value can change at any time.
+38:What is the functionality of the function strstr and stristr?
+strstr Returns part of string from the first occurrence of needle(sub string that we finding out ) to the end of string.
+$email= 'sonialouder@gmail.com';
+$domain = strstr($email, '@');
+echo $domain; // prints @gmail.com
+here @ is the needle
+stristr is case-insensitive means able not able to diffrenciate between a and A
+39:What are the differences between PHP 3 and PHP 4 and PHP 5?
+There are lot of difference among these three version of php
+1>Php3 is oldest version after that php4 came and current version is php5 (php5.3) where php6 have to come
+2>Difference mean oldest version have less functionality as compare to new one like php5 have all OOPs concept now where as php3 was pure procedural language constructive like C
+In PHP5 1. Implementation of exceptions and exception handling
+2. Type hinting which allows you to force the type of a specific argument
+3. Overloading of methods through the __call function
+4. Full constructors and destructors etc through a __constuctor and __destructor function
+5. __autoload function for dynamically including certain include files depending on the class you are trying to create.
+6 Finality : can now use the final keyword to indicate that a method cannot be overridden by a child. You can also declare an entire class as final which prevents it from having any children at all.
+7 Interfaces & Abstract Classes
+8 Passed by Reference :
+9 An __clone method if you really want to duplicate an object
+10 Numbers of Functions Deprecated in php 5.x like ereg,ereg_replace,magic_quotes_runtime, session_register,register_globals, split(), call_user_method() etc 
+
+40:What is the functionality of the function htmlentities?
+Convert all applicable characters to HTML entities
+This function is identical to htmlspecialchars() in all ways, except
+with htmlentities(), all characters which have HTML character entity equivalents are translated into these entities.
+41:What is the difference between the functions unlink and unset?
+unlink() deletes the given file from the file system.
+unset() makes a variable undefined.
+42:How can we register the variables into a session?
+$_SESSION['name'] = "sonia";
+43:How many ways can we get the value of current session id?
+session_id() returns the session id for the current session.
+44:How can we destroy the session, how can we unset 
+the variable of a session?
+session_unregister - Unregister a global variable from the current
+session
+session_unset- Free all session variables
+
+45:What is the maximum size of a file that can be
+ uploaded using PHP and how can we change this?
+By default the maximum size is 2MB. and we can change the following
+setup at php.iniupload_max_filesize = 2M
+46:What are the different functions in sorting an array?
+Simple sorting
+simple sorting of an array’s elements from lowest to highest, either numerically or alphabetically. The PHP function to accomplish this is sort()
+Eg: 
+$data = array(5,8,1,7,2);
+sort($data);
+print_r($data);
+?>
+Here’s the output:
+Array ([0] => 1
+
+[1] => 2
+
+[2] => 5
+
+[3] => 7
+
+[4] => 8
+
+)
+It’s also possible to reverse the simple sort demonstrated previously, with the rsort() function. This function rearranges an array’s elements from highest to lowest, either numerically or alphabetically
+
+Sorting by key
+When working with associative arrays, it’s often useful to re-sort the array by keys, again from highest to lowest. The ksort() function is designed for just this task; it maintains the key-value correlation during the sorting process.
+Eg: 
+ $data = array("US" => "United States", "IN" => "India", "DE" => "Germany", "ES" => "Spain");ksort($data); print_r($data);
+?>
+And here’s the output:
+
+Array ([DE] => Germany
+
+[ES] => Spain
+
+[IN] => India
+
+[US] => United States
+
+)
+You can also reverse-sort by key with the krsort() function 
+
+Sorting by value
+
+If, instead, you’d prefer to sort your associative array by value instead of key, PHP’s got you covered there too. Simply use the asort() function instead of the aforementioned ksort() function, 
+
+"United States", "IN" => "India", "DE" => "Germany", "ES" => "Spain");asort($data); print_r($data);
+
+?>
+Here’s the output. Notice the difference between this and the output of ksort() above — in both cases, the sorting is alphabetic, but the sorting has been performed on different fields of the array. Notice also that the key-value association is maintained throughout; it’s only the manner in which the key-value pairs are ordered that has changed.
+
+Array ([DE] => Germany
+
+[IN] => India
+
+[ES] => Spain
+
+[US] => United States
+
+)
+As you will have guessed by now, this sort can also be accomplished in reverse, with a call to arsort().
+
+
+Natural-language sorting
+PHP also has the unique ability to sort arrays the way humans would, using cognitive rather than computational rules. This feature is referred to as natural-language sorting, and it’s very useful when building fuzzy-logic applications.
+
+Eg:
+$data = array("book-1", "book-10", "book-100", "book-5"); natsort($data);print_r($data);
+Here’s the output:
+Array
+(
+[0] => book-1
+[3] => book-5
+[1] => book-10
+[2] => book-100
+)
+Reverse natural-language sorting? Sure! Just use the array_reverse() function on the output of natsort(),
+Eg:
+$data = array("book-1", "book-10", "book-100", "book-5");natsort($data); print_r(array_reverse($data));
+?>
+And here’s the output:
+Array ([0] => book-100 
+[1] => book-10
+[2] => book-5
+[3] => book-1
+)
+
+47:What are the difference between abstract class and interface?
+
+Abstract class: abstract classes are the class where one or more
+methods are abstract but not necessarily all method has to be
+abstract.Abstract methods are the methods, which are declare in
+its class but not define. The definition of those methods must be
+in its extending class.
+
+Interface: Interfaces are one type of class where all the methods
+are abstract. That means all the methods only declared but not
+defined.All the methods must be define by its implemented class.
+
+48:How To Get the Uploaded File Information in the Receiving Script?
+
+Once the Web server received the uploaded file, it will call the PHP script specified in the form action attribute to process them. This receiving PHP
+script can get the uploaded file information through the predefined
+array called $_FILES. Uploaded file information is organized in
+ $_FILES as a two-dimensional array as:
+
+$_FILES[$fieldName]['name'] – The Original file name on the browser system.
+
+$_FILES[$fieldName]['type'] – The file type determined by the browser.
+
+$_FILES[$fieldName]['size'] – The Number of bytes of the file content.
+
+$_FILES[$fieldName]['tmp_name'] – The temporary filename of the file in which the uploaded file was stored on the server.
+
+$_FILES[$fieldName]['error'] – The error code associated with this file upload.
+
+49:What’s the special meaning of __sleep and __wakeup?
+
+__sleep returns the array of all the variables than need to be saved,
+ while __wakeup retrieves them.
+
+50:How can we know the count/number of elements of an array?
+2 ways:
+a) sizeof($array) – This function is an alias of count()
+b) count($urarray) – This function returns the number of elements in an array.
+51:What’s the difference between accessing a class method via -> and via ::? 
+:: is allowed to access methods that can perform static operations,
+i.e. those, which do not require object initialization.
+52:What changes I have to do in php.ini file for file uploading?
+Make the following line uncomment like:
+; Whether to allow HTTP file uploads.
+file_uploads = On
+; Temporary directory for HTTP uploaded files (will use system default if not specified).
+upload_tmp_dir = C:\apache2triad\temp
+; Maximum allowed size for uploaded files.
+upload_max_filesize = 2M
+53:What type of headers have to be added in the mail function to attach a file?
+$boundary = ‘–’ . md5( uniqid ( rand() ) );
+$headers = “From: \”Me\”\n”;
+$headers .= “MIME-Version: 1.0\n”;
+$headers .= “Content-Type: multipart/mixed; boundary=\”$boundary\”";
+54:
