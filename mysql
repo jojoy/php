@@ -1,0 +1,162 @@
+Mysql interview questions and answers are below
+'
+Questions : 1   how to do login in mysql with unix shell
+Answers :1	 By below method if password is pass and user name is root
+# [mysql dir]/bin/mysql -h hostname -u root -p pass
+ 	 
+Questions : 2	 how you will Create a database on the mysql server with unix shell
+Answers : 2	 mysql> create database databasename;
+ 	 
+Questions : 3	 how to list or view all databases from the mysql server.
+Answers : 3	 mysql> show databases;
+ 	 
+Questions : 4	 How Switch (select or use) to a database.
+Answers : 4	 mysql> use databasename;
+ 	 
+Questions : 5	 How To see all the tables from a database of mysql server.
+Answers : 5	 mysql> show tables;
+ 	 
+Questions : 6	How to see table's field formats or description of table .
+Answers : 6	 mysql> describe tablename;
+ 	 
+Questions : 7	 How to delete a database from mysql server.
+Answers : 7	 mysql> drop database databasename;
+ 	 
+Questions : 8	 How we get Sum of column
+Answers : 8	 mysql> SELECT SUM(*) FROM [table name];
+ 	 
+Questions : 9	 How to delete a table
+Answers : 9	 mysql> drop table tablename;
+ 	 
+Questions : 10	 How you will Show all data from a table.
+Answers : 10	 mysql> SELECT * FROM tablename;
+ 	 
+Questions : 11	 How to returns the columns and column information pertaining to the designated table
+Answers : 11	 mysql> show columns from tablename;
+ 	 
+Questions : 12	 How to Show certain selected rows with the value "pcds"
+Answers : 12	 mysql> SELECT * FROM tablename WHERE fieldname = "pcds";
+ 	 
+Questions : 13	 How will Show all records containing the name "sonia" AND the phone number '9876543210'
+Answers : 13	 mysql> SELECT * FROM tablename WHERE name = "sonia" AND phone_number = '9876543210';
+ 	 
+Questions : 14	 How you will Show all records not containing the name "sonia" AND the phone number '9876543210' order by the phone_number field.
+Answer : 14	 mysql> SELECT * FROM tablename WHERE name != "sonia" AND phone_number = '9876543210' order by phone_number;
+ 	 
+Questions : 15	 How to Show all records starting with the letters 'sonia' AND the phone number '9876543210'
+Answers : 15	 mysql> SELECT * FROM tablename WHERE name like "sonia%" AND phone_number = '9876543210';
+ 	 
+Questions : 16	 How to show all records starting with the letters 'sonia' AND the phone number '9876543210' limit to records 1 through 5.
+Answers : 16	 mysql> SELECT * FROM tablename WHERE name like "sonia%" AND phone_number = '9876543210' limit 1,5;
+ 	 
+Questions : 16	 Use a regular expression to find records. Use "REGEXP BINARY" to force case-sensitivity. This finds any record beginning with r.
+Answer : 16	 mysql> SELECT * FROM tablename WHERE rec RLIKE "^r";
+ 	 
+Questions : 17	 How you will Show unique records.
+Answer : 17	 mysql> SELECT DISTINCT columnname FROM tablename;
+ 	 
+Questions : 18	 how we will Show selected records sorted in an ascending (asc) or descending (desc)
+Answer : 18	 mysql> SELECT col1,col2 FROM tablename ORDER BY col2 DESC;
+
+mysql> SELECT col1,col2 FROM tablename ORDER BY col2 ASC;
+
+ 	 
+Questions : 19	 how to Return total number of rows.
+Answers : 19	 mysql> SELECT COUNT(*) FROM tablename;
+ 	 
+Questions : 20	 How to Join tables on common columns.
+Answer : 20	 mysql> select lookup.illustrationid, lookup.personid,person.birthday from lookup left join person on lookup.personid=person.personid=statement to join birthday in person table with primary illustration id
+ 	 
+Questions : 21	 How to Creating a new user. Login as root. Switch to the MySQL db. Make the user. Update privs.
+Answer : 21	 # mysql -u root -p
+
+mysql> use mysql;
+
+mysql> INSERT INTO user (Host,User,Password) VALUES('%','username',PASSWORD('password'));
+
+mysql> flush privileges;
+ 	 
+Questions : 22	 How to Change a users password from unix shell.
+Answers : 22	 # [mysql dir]/bin/mysqladmin -u username -h hostname.blah.org -p password 'new-password'
+ 	 
+Questions : 23	 How to Change a users password from MySQL prompt. Login as root. Set the password. Update privs.
+Answer : 23	 # mysql -u root -p
+
+mysql> SET PASSWORD FOR 'user'@'hostname' = PASSWORD('passwordhere');
+
+mysql> flush privileges;
+ 	 
+Questions : 24	 How to Recover a MySQL root password. Stop the MySQL server process. Start again with no grant tables. Login to MySQL as root. Set new password. Exit MySQL and restart MySQL server.
+Answer : 24	 # /etc/init.d/mysql stop 
+# mysqld_safe --skip-grant-tables &
+# mysql -u root
+mysql> use mysql;
+mysql> update user set password=PASSWORD("newrootpassword") where User='root';
+mysql> flush privileges;
+mysql> quit
+# /etc/init.d/mysql stop
+# /etc/init.d/mysql start
+ 	 
+Questions : 25	 How to Set a root password if there is on root password.
+Answer : 25	 # mysqladmin -u root password newpassword
+ 	 
+Questions : 26	 How to Update a root password.
+Answer : 26	 # mysqladmin -u root -p oldpassword newpassword
+ 	 
+Questions : 27	 How to allow the user "sonia" to connect to the server from localhost using the password "passwd". Login as root. Switch to the MySQL db. Give privs. Update privs.
+Answers : 27	 # mysql -u root -p
+mysql> use mysql;
+mysql> grant usage on *.* to sonia@localhost identified by 'passwd';
+mysql> flush privileges;
+ 	 
+Questions : 28	 How to give user privilages for a db. Login as root. Switch to the MySQL db. Grant privs. Update privs.
+Answers : 28	 # mysql -u root -p
+mysql> use mysql;
+mysql> INSERT INTO user (Host,Db,User,Select_priv,Insert_priv,Update_priv,Delete_priv,Create_priv,Drop_priv) VALUES ('%','databasename','username','Y','Y','Y','Y','Y','N');
+mysql> flush privileges; 
+or 
+mysql> grant all privileges on databasename.* to username@localhost;
+mysql> flush privileges;
+ 	 
+Questions : 29	 How To update info already in a table and Delete a row(s) from a table.
+Answer : 29	 mysql> UPDATE [table name] SET Select_priv = 'Y',Insert_priv = 'Y',Update_priv = 'Y' where [field name] = 'user'; 
+mysql> DELETE from [table name] where [field name] = 'whatever';
+ 	 
+Questions : 30	 How to Update database permissions/privilages.
+Answer : 30	 mysql> flush privileges;
+ 	 
+Questions : 31	 How to Delete a column and Add a new column to database
+Answer : 31	 mysql> alter table [table name] drop column [column name];
+mysql> alter table [table name] add column [new column name] varchar (20);
+ 	 
+Questions : 32	 Change column name and Make a unique column so we get no dupes.
+Answer : 32	 mysql> alter table [table name] change [old column name] [new column name] varchar (50);
+mysql> alter table [table name] add unique ([column name]);
+ 	 
+Questions : 33	 How to make a column bigger and Delete unique from table.
+Answer : 33	 mysql> alter table [table name] modify [column name] VARCHAR(3);
+mysql> alter table [table name] drop index [colmn name];
+ 	 
+Questions : 34	 How to Load a CSV file into a table
+Answer : 34	 mysql> LOAD DATA INFILE '/tmp/filename.csv' replace INTO TABLE [table name] FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' (field1,field2,field3);
+ 	 
+Questions : 35	 How to dump all databases for backup. Backup file is sql commands to recreate all db's.
+Answer : 35	 # [mysql dir]/bin/mysqldump -u root -ppassword --opt >/tmp/alldatabases.sql
+ 	 
+Questions : 36	How to dump one database for backup.
+Answer : 36	 # [mysql dir]/bin/mysqldump -u username -ppassword --databases databasename >/tmp/databasename.sql
+ 	 
+Questions : 37	 How to dump a table from a database.
+Answer : 37	 # [mysql dir]/bin/mysqldump -c -u username -ppassword databasename tablename > /tmp/databasename.tablename.sql
+ 	 
+Questions : 38	 Restore database (or database table) from backup.
+Answer : 38	 # [mysql dir]/bin/mysql -u username -ppassword databasename < /tmp/databasename.sql
+ 	 
+Questions : 39	 How to Create Table show Example
+Answer : 39	 mysql> CREATE TABLE [table name] (firstname VARCHAR(20), middleinitial VARCHAR(3), lastname VARCHAR(35),suffix VARCHAR(3),officeid VARCHAR(10),userid VARCHAR(15),username VARCHAR(8),email VARCHAR(35),phone VARCHAR(25), groups VARCHAR(15),datestamp DATE,timestamp time,pgpemail VARCHAR(255));
+Questions : 40	How to search second maximum(second highest) salary value(integer)from table employee (field salary)in the manner so that mysql gets less load?
+Answers : 40	
+By below query we will get second maximum(second highest) salary value(integer)from table employee (field salary)in the manner so that mysql gets less load? 
+SELECT DISTINCT(salary) FROM employee order by salary desc limit 1 , 1 ; 
+(This way we will able to find out 3rd highest , 4th highest salary so on just need to change limit condtion like LIMIT 2,1 for 3rd highest and LIMIT 3,1 for 4th 
+some one may finding this way useing below query that taken more time as compare to above query SELECT salary FROM employee where salary < (select max(salary) from employe) order by salary DESC limit 1 ;
