@@ -1,0 +1,358 @@
+Mysql Interview questions and answers
+1:What's MySQL ?
+           MySQL (pronounced "my ess cue el") is an open source relational database management system (RDBMS) that uses Structured Query Language (SQL), the most popular language for adding, accessing, and processing data in a database. Because it is open source, anyone can download MySQL and tailor it to their needs in accordance with the general public license. MySQL is noted mainly for its speed, reliability, and flexibility.
+2:What is DDL, DML and DCL ?
+         If you look at the large variety of SQL commands, they can be divided into three large subgroups. Data Definition Language deals with database schemas and descriptions of how the data should reside in the database, therefore language statements like CREATE TABLE or ALTER TABLE belong to DDL. DML deals with data manipulation, and therefore includes most common SQL statements such SELECT, INSERT, etc. Data Control Language includes commands such as GRANT, and mostly concerns with rights, permissions and other controls of the database system.
+3:How do you start and stop MySQL on Windows?
+        - net start MySQL, net stop MySQL
+4: How do you start MySQL on Linux?
+         - /etc/init.d/mysql start
+5:How do you change a password for an existing user via mysqladmin?                  mysqladmin -u root -p password "newpassword"
+6:Explain the difference between MyISAM Static and MyISAM Dynamic.
+         In MyISAM static all the fields have fixed width. The Dynamic MyISAM table would include fields such as TEXT, BLOB, etc. to accommodate the data types with various lengths. MyISAM Static would be easier to restore in case of corruption, since even though you might lose some data, you know exactly where to look for the beginning of the next record. 
+7:What does myisamchk do? 
+          It compressed the MyISAM tables, which reduces their disk usage.
+8:Explain advantages of MyISAM over InnoDB?  
+            Much more conservative approach to disk space management - each MyISAM table is stored in a separate file, which could be compressed then with myisamchk if needed. With InnoDB the tables are stored in tablespace, and not much further optimization is possible. All data except for TEXT and BLOB can occupy 8,000 bytes at most. No full text indexing is available for InnoDB. TRhe COUNT(*)s execute slower than in MyISAM due to tablespace complexity. 
+9:What happens when the column is set to AUTO INCREMENT and you reach the maximum value for that table? 
+          It stops incrementing. It does not overflow to 0 to prevent data losses, but further inserts are going to produce an error, since the key has been used already.
+10: What happens if a table has one column defined as TIMESTAMP?               That field gets the current timestamp whenever the row gets altered.
+11: But what if you really want to store the timestamp data, such as the publication date of the article? 
+           Create two columns of type TIMESTAMP and use the second one for your real data.
+12:What Is Primary Key?
+        A primary key is a single column or multiple columns defined to have unique values that can be used as row identifications.
+13:What Is Foreign Key?
+       A foreign key is a single column or multiple columns defined to have values that can be mapped to a primary key in another table. 
+14:What Is Index?
+         An index is a single column or multiple columns defined to have values pre-sorted to speed up data retrieval speed.
+15:What Is View?
+         A view is a logical table defined by a query statement.
+16:What Is Transaction?
+         A transaction is a logical unit of work requested by a user to be applied to the database objects. MySQL server introduces the transaction concept to allow users to group one or more SQL statements into a single transaction, so that the effects of all the SQL statements in a transaction can be either all committed (applied to the database) or all rolled back (undone from the database). 
+17:What Is Commit?
+          Commit is a way to terminate a transaction with all database changes to be saved permanently to the database server. 
+18:What Is Rollback?
+          Rollback is a way to terminate a transaction with all database changes not saving to the database server.
+19:When you create a table, and then run SHOW CREATE TABLE on it, you occasionally get different results than what you typed in. What does MySQL modify in your newly created tables?
+1. VARCHARs with length less than 4 become CHARs
+2. CHARs with length more than 3 become VARCHARs.
+3. NOT NULL gets added to the columns declared as PRIMARY KEYs
+4. Default values such as NULL are specified for each column .
+20:How do you get the number of rows affected by query? 
+        SELECT COUNT (user_id) FROM users would only return the number of user_id’s.
+21:If the value in the column is repeatable, how do you find out the unique values? 
+        Use DISTINCT in the query, such as SELECT DISTINCT user_firstname FROM users; You can also ask for a number of distinct values by saying SELECT COUNT (DISTINCT user_firstname) FROM users;
+22:How do you return the a hundred books starting from 25th? 
+          SELECT book_title FROM books LIMIT 25, 100. The first number in LIMIT is the offset, the second is the number.
+23:What types of privileges are there in MySQL ?
+          There are 4 types of privileges.
+i). Global privileges like *.* (all hosts connecting to Mysql db server)
+Ex: GRANT SELECT, INSERT ON *.* TO ‘someuser’@'somehost’;
+ii). Database privileges like .*
+Ex: GRANT SELECT, INSERT ON mydb.* TO ‘someuser’@'somehost’;
+iii). Table privileges like SELECT, INSERT, UPDATE, DELETE
+Ex: GRANT SELECT, INSERT ON mydb.mytbl TO ‘someuser’@'somehost’;
+iv). Column privileges like
+Ex: GRANT SELECT (col1), INSERT (col1,col2) ON mydb.mytbl TO ‘someuser’@'somehost’; 
+24:How do I grant permission to a specific host ?
+Command: GRANT ALL ON *.* TO ‘user_name’@'host_name’ IDENTIFIED BY ‘password’ ;
+Ex: GRANT ALL ON *.* TO ‘test_app’@'sustain-75.central’ IDENTIFIED BY ‘testapp123′;
+25:Is it possible to insert multiple rows using single command in MySQL ?
+         Yes. Please see below example.
+INSERT INTO tbl_name (a,b,c) VALUES(1,2,3),(4,5,6),(7,8,9) ;
+
+26:How do you return the a hundred books starting from 25th?
+       SELECT book_title FROM books LIMIT 25, 100. The first number in LIMIT is the offset, the second is the number.
+27:When would you use ORDER BY in DELETE statement?
+When you’re not deleting by row ID. Such as in DELETE FROM employee ORDER BY timestamp LIMIT 1. This will delete the most recently posted question in the table temployee.
+28:How would you delete a column?
+        ALTER TABLE employee DROP phone.
+29:How do you find out which auto increment was assigned on the last insert?
+         SELECT LAST_INSERT_ID() will return the last value assigned by the auto_increment function. Note that you don’t have to specify the table name.
+30:What are HEAP tables in MySQL?
+        HEAP tables are in-memory. They are usually used for high-speed temporary storage. No TEXT or BLOB fields are allowed within HEAP tables. You can only use the comparison operators = and <=>. HEAP tables do not support AUTO_INCREMENT. Indexes must be NOT NULL.
+31:What happens when the column is set to AUTO INCREMENT and you reach the maximum value for that table?
+         It stops incrementing. It does not overflow to 0 to prevent data losses, but further inserts are going to produce an error, since the key has been used already.
+32: What is REPLCAE statement, and how do I use it?
+
+          The REPLACE statement is the same as using an INSERT INTO command. The syntax is pretty much the same. The difference between an INSERT statement and a REPLACE statement is that MySQL will delete the old record and replace it with the new values in a REPLACE statement, hence the name REPLACE.
+33: Do all unique keys have to be primary keys?
+         No. MySQL permits only one primary key per table, but there may be a number of unique keys. Both unique keys and primary keys can speed up the selecting of data with a WHERE clause, but a column should be chosen as the primary key if this is the column by which you want to join the table with other tables.
+34:How many databases can one MySQL RDBMS contain?
+         Because MySQL uses the file system of the operating system, there really is no limit to the number of databases contained within a single MySQL RDBMS. The size of the database is limited by the operating system. The database tables can only be as big as the OS's file system will allow.
+35:I want to sort the values of my ENUM and SET columns. How do I do this? 
+         The sort order depends on the order in which the values were inserted. ENUM and SET types are not case sensitive. The value that is inserted reverts to the value that you used when you created the ENUM or SET.
+36:What do I do if I forget the MySQL root password?
+         First log in to the system as the same person who is running the mysqld
+daemon (probably root). Kill the process, using the kill command.
+Restart MySQL with the following arguments:
+bin/mysqld Skip-grant
+USE mysql;
+UPDATE user SET password = password('newpassword') WHERE User = 'root';
+Exit
+bin/mysqladmin reload 
+The next time you log in, you will use your new password
+37: Where is the data stored in a MySQL database?
+         MySQL uses files to store data. These files are under the data/databasename directory, where databasename is the name of the database. There are three file types: .ISM, .FRM, and .ISD. The .FRM file contain the table schema. The .ISD is the file that actually holds the data. The .ISM file is the file that provides quick access between the two of them.
+38:Explain "REPAIR TABLE" statement? 
+     The REPAIR TABLE statement corrects problems in a table that has become corrupted. It works only for MyISAM tables.
+39:Explain "OPTIMIZE TABLE" statement? 
+       The OPTIMIZE TABLE statement cleans up a MyISAM table by defragmenting it. This involves reclaiming unused space resulting from deletes and updates, and coalescing records that have become split and stored non-contiguously. OPTIMIZE TABLE also sorts the index pages if they are out of order and updates the index statistics.
+40:What is the difference between CHAR AND VARCHAR?
+The CHAR and VARCHAR types are similar, but differ in the way they are stored and retrieved.
+The length of a CHAR column is fixed to the length that you declare when you create the table.
+The length can be any value between 1 and 255. When CHAR values are stored, they are right-padded with spaces to the specified length. When CHAR values are retrieved, trailing spaces are removed.
+41:what is difference between primary key and candidate key?
+ Primary Key
+- are used to uniquely identify each row of the table. A table can have only one primary Key.
+Candidate Key
+- primary key is a candidate key. There is no difference. By common convention one candidate key is designated as a “primary” one and that key is used for any foreign key references.
+42:What is the difference between mysql_fetch_array and mysql_fetch_object?
+mysql_fetch_array(): - returns a result row as a associated array, regular array from database.
+mysql_fetch_object: - returns a result row as object from database.
+43:Self join in Mysql:
+Self join is a method of centralizing relational data to a single table.A self-join joins the table to itself.
+Example:
+CREATE TABLE employees (
+    NAME VARCHAR(20), 
+    email VARCHAR(20),
+    mobile VARCHAR(20), 
+    sex CHAR(1), 
+    birth_date DATE, 
+); 
+INSERT INTO  employees VALUES ('xyz','xyz@example.com','11212','F','1985-06-05');
+INSERT INTO  employees VALUES ('abc','abc@example.com','11111','M','1985-03-05');
+INSERT INTO  employees VALUES ('abc1','abc1@example.com','21111','M','1987-03-05');
+ SELECT e1.name, e2.name,e1.email
+FROM employees AS e1, employees AS e2
+WHERE e1.email = e2.email AND e1.sex = 'F' AND e2.sex = 'M';
+43:How MySQL Optimizes LEFT JOIN and RIGHT JOIN ?
+        A LEFT JOIN B in MySQL is implemented as follows:
+The table B is set to be dependent on table A and all tables that A is dependent on.
+The table A is set to be dependent on all tables (except B) that are used in the LEFT JOIN condition.
+All LEFT JOIN conditions are moved to the WHERE clause.
+All standard join optimizations are done, with the exception that a table is always read after all tables it is dependent on. If there is a circular dependence then MySQL will issue an error.
+All standard WHERE optimizations are done.
+If there is a row in A that matches the WHERE clause, but there wasn’t any row in B that matched the LEFT JOIN condition, then an extra B row is generated with all columns set to NULL.
+If you use LEFT JOIN to find rows that don’t exist in some table and you have the following test: column_name IS NULL in the WHERE part, where column_name is a column that is declared as NOT NULL, then MySQL will stop searching after more rows (for a particular key combination) after it has found one row that matches the LEFT JOIN condition.
+RIGHT JOIN is implemented analogously as LEFT JOIN.
+The table read order forced by LEFT JOIN and STRAIGHT JOIN will help the join optimizer (which calculates in which order tables should be joined) to do its work much more quickly, as there are fewer table permutations to check.
+Note that the above means that if you do a query of type:
+SELECT * FROM a,b LEFT JOIN c ON (c.key=a.key) LEFT JOIN d (d.key=a.key) WHERE b.key=d.key
+MySQL will do a full scan on b as the LEFT JOIN will force it to be read before d.
+The fix in this case is to change the query to:
+SELECT * FROM b,a LEFT JOIN c ON (c.key=a.key) LEFT JOIN d (d.key=a.key) WHERE b.key=d.key
+
+44:Joins in MYSQL
+         “JOIN” is a SQL keyword used to query data from two or more related tables.
+To very simple example would be users (students) and course enrollments: 
+‘user’ table:
+id  name	course
+1	Alice	1
+2	Bob	1
+3	Caroline	2
+4	David	5
+5	Emma	(NULL)
+
+‘course’ table:
+id	name
+1	HTML5
+2	CSS3
+3	JavaScript
+4	PHP
+5	MySQL
+INNER JOIN (or just JOIN)
+         The most frequently used clause is INNER JOIN. This produces a set of records which match in both the user and course tables, i.e. all users who are enrolled on a course: 
+
+
+
+
+
+
+
+  
+
+Query 
+ SELECT user.name, course.name
+FROM `user`
+INNER JOIN `course` on user.course = course.id; 
+
+Result:
+user.name	         course.name
+Alice	            HTML5
+Bob	            HTML5
+Carline	            CSS3
+David 	            MySQL
+LEFT JOIN
+        What if we require a list of all students and their courses even if they’re not enrolled on one? A LEFT JOIN produces a set of records which matches every entry in the left table (user) regardless of any matching entry in the right table (course):
+
+
+
+
+
+
+
+
+Query
+SELECT user.name, course.name
+FROM `user`
+LEFT JOIN `course` on user.course = course.id;
+Result:
+user.name	        course.name
+Alice	            HTML5
+Bob	            HTML5
+Carline	            CSS3
+David	            MySQL
+Emma	           (NULL)
+
+RIGHT JOIN
+         Perhaps we require a list all courses and students even if no one has been enrolled? A RIGHT JOIN produces a set of records which matches every entry in the right table (course) regardless of any matching entry in the left table (user):
+
+
+
+
+
+
+
+
+Query
+SELECT user.name, course.name
+FROM `user`
+RIGHT JOIN `course` on user.course = course.id;
+
+Result:
+user.name	course.name
+Alice	HTML5
+Bob	HTML5
+Carline	CSS3
+(NULL)	JavaScript
+(NULL)	PHP
+David	MySQL
+OUTER JOIN (or FULL OUTER JOIN)
+        Our last option is the OUTER JOIN which returns all records in both tables regardless of any match. Where no match exists, the missing side will contain NULL.
+        OUTER JOIN is less useful than INNER, LEFT or RIGHT and it’s not implemented in MySQL. However, you can work around this restriction using the UNION of a LEFT and RIGHT JOIN, e.g.
+
+
+
+
+
+
+
+
+Result:
+user.name	         course.name
+Alice	              HTML5
+Bob	              HTML5
+Carline	             CSS3
+David	             MySQL
+Emma	             (NULL)
+(NULL)	             JavaScript
+(NULL)	             PHP
+
+45:Stored procedure in MYSQL
+          Stored procedures are set of SQL commands that are stored in the database data server. After the storing of the commands is done, the tasks can be performed or executed continuously, without being repeatedly sent to the server. This also helps in decreasing the traffic.
+There are many advantages of using stored procedures, which include:
+    * The functionality is application and platform related.
+    * Functionality has to be developed only once, and all applications can call the same commands.
+    * Task execution becomes easier and less complicated.
+    * Network Traffic reduced to a greater extent.
+    * Centralization of all commands made possible, which is helpful for various applications that repeatedly call the same set of complicated commands.
+     * Runs on any kind of environment.
+param_name type
+type:
+Any valid MySQL data type
+characteristic:
+LANGUAGE SQL
+| [NOT] DETERMINISTIC
+| { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+| SQL SECURITY { DEFINER | INVOKER }
+| COMMENT 'string'
+routine_body:
+Valid SQL procedure statement
+Application
+MySQL Stored Procedures can be applied in absolutely any place. Right from complex applications to simple procedures, these stored procedures can be utilized in absolutely any place.
+Few of the many places that MySQL Stored procedures can be used are:
+    * When diverse client applications are structured using various languages in different platforms.
+    * When security is of highest importance, like in financial institutions, the users and applications would have no direct access to the database tables. This provides excellent secured environment.
+    * When very few database servers service the client machines, thereby providing efficient performance.
+Though not as mature as Oracle, DB2 or the SQL Server, the MySQL Stored Procedures is definitely worth a try. If the structure of the database is the same, the same stored procedures can be used for all.
+A simple example for MySQL Stored Procedure
+To calculate the area of a circle with given radius R, the following commands can be given
+
+delimiter //
+create function Area (R double) returns double
+deterministic
+begin
+declare A double;
+set A = R * R * pi();
+return A;
+end
+//
+delimiter ;
+And to call it from php code to display the area of a circle with radius 22cm,
+$rs_area = mysql_query(“select Area(22)”);
+$area = mysql_result($rs_area,0,0);
+echo “The area of the circle with radius 22cm is ”.$area.” sq.cm”;
+?>
+46: What is a Trigger in MySQL Define different types of Trigger?
+        A trigger is a named database object that is associated with a table, and that activates when a particular event occurs for the table. Some uses for triggers are to perform checks of values to be inserted into a table or to perform calculations on values involved in an update.
+       A trigger is associated with a table and is defined to activate when an INSERT, DELETE, or UPDATE statement for the table executes. A trigger can be set to activate either before or after the triggering statement. For example, you can have a trigger activate before each row that is deleted from a table or after each row that is updated.
+An example of the MySQL triggers usage can be found below:
+    *   First we will create the table for which the trigger will be set.
+mysql> CREATE TABLE people (age INT, name varchar(150));
+    *   Next we will define the trigger. It will be executed before every INSERT statement for the people table.
+mysql> delimiter //
+mysql> CREATE TRIGGER agecheck BEFORE INSERT ON people FOR EACH ROW IF NEW.age < 0 THEN SET NEW.age = 0; END IF;//
+Query OK, 0 rows affected (0.00 sec)
+mysql> delimiter ;
+    *   We will insert two records to check the trigger functionality.
+mysql> INSERT INTO people VALUES (-20, 'Sid'), (30, 'Josh');
+Query OK, 2 rows affected (0.00 sec)
+Records: 2 Duplicates: 0 Warnings: 0
+    *   At the end we will check the result.
+mysql> SELECT * FROM people;
++-------+-------+
+| age | name |
++-------+-------+
+| 0 | Sid |
+| 30 | Josh |
++-------+-------+
+2 rows in set (0.00 sec)
+
+47:WHAT IS A VIEW?
+      A view is a pre-compiled virtual table that is generated by a user-defined SELECT statement. Unlike tables, views don't physically store data on the database server, instead they act as aliases to existing tables.
+WHY USE VIEWS?
+         Views are used to customize the data that gets returned from a SELECT query.
+BEFORE WE BEGIN
+       The following CREATE TABLE queries should be executed on a test database, if you plan to follow along with my examples:
+CREATE TABLE NewsCategories
+( catID int not null auto_increment, catName varchar(32), primary key(catID));
+CREATE TABLE News
+( newsID int not null auto_increment, catID int not null, title
+varchar(32) not null, txt blob, primary key(newsID));
+INSERT INTO NewsCategories (catName) VALUES ('Main');
+INSERT INTO News (catID, title, txt) VALUES (1, 'My Article!', 'Hello World');
+CREATING A VIEW
+Views are relatively easy to use. The syntax for creating a view is:
+CREATE
+[OR REPLACE]
+[ALGORITHM = {UNDEFINED | MERGE | TEMPTABLE}]
+[DEFINER = { user | CURRENT_USER }]
+[SQL SECURITY { DEFINER | INVOKER }]
+VIEW view_name [(column_list)]
+AS select_statement
+[WITH [CASCADED | LOCAL] CHECK OPTION]
+The following command will create a simple view that pulls the title and txt field from the News table:
+CREATE VIEW newsView AS SELECT title, txt FROM News;
+         To see your view in action all you will need to do is run a normal SELECT statement against the view (instead of a table). The following query will run the view you just created, which will select all title and txt fields from the News table.
+SELECT * FROM newsView
+           To create a view with MySQL Query Browser, simply right click on the database (in the right column) and click Create New View. Enter a view name and click Create View. You will then be presented with a code template for creating a view.
+MODIFYING A VIEW
+        To get a list of views, you can use the SHOW TABLES command. Here is a SHOW TABLES query that will display only views and filter out tables:
+SHOW FULL TABLES WHERE Table_type='VIEW'
+To see the code behind the view, run:
+SHOW CREATE VIEW newsView
+         The code it returns will probably be slightly different than the code you created, but it should do the same thing. It will include all of the optional CREATE VIEW attributes, which you didn't include in the example above. You should be able to copy and paste the code and change the CREATE VIEW to ALTER VIEW. Let's also JOIN the NewsCategories table so that we can see the CatName each news record is associated with, while SELECTing from our view. So it should look something like this:
+ALTER ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `newsview` AS
+SELECT n.newsID, n.catID, n.title, n.txt, c.catName FROM News AS n JOIN NewsCategories AS c ON c.catID=n.catID
+          You can easily create and modify views using the Query Browser tool. If you're using the latest version of MySQL Query Browser, you should see your view listed along with your tables under your selected database in the right column. If this is the case, you can right click on the View and click Edit View.
