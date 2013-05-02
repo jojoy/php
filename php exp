@@ -1,0 +1,228 @@
+php interview questions and answers for experienced
+1:What is the value of $b in the following code?
+    $a="5 USD";
+    $b=10+$a;
+    echo $b;
+?>
+
+Ans:15
+2:What are the differences between Get and post methods in form submitting, give the case where we can use get and we can use post methods?
+  In the get method the data made available to the action page ( where data is received ) by the URL so data can be seen in the address bar. Not advisable if you are sending login info like password etc.
+
+In the post method the data will be available as data blocks and not as query string. 
+3:What is GPC?
+G – Get
+P – Post
+C – Cookies 
+4:What are super global arrays?
+All variables that come into PHP arrive inside one of several special arrays known collectively as the superglobals. They're called superglobal because they are available everywhere in your script, even inside classes and functions.
+5:Give some example for super global arrays?
+$GLOBALS
+$_GET
+$_POST
+$_SESSION
+$_COOKIE
+$_REQUEST
+$_ENV
+$_SERVER
+6:What's the difference between COPY OF A FILE & MOVE_UPLOAD_FILE in file uploading?
+
+MOVE_UPLOAD_FILE :   This function checks to ensure that the file designated by filename is a valid upload file (meaning that it was uploaded via PHP's HTTP POST upload mechanism). If the file is valid, it will be moved to the filename given by destination.
+If filename is not a valid upload file, then no action will occur, and move_uploaded_file() will return FALSE.
+Copy :Makes a copy of a file. Returns TRUE if the copy succeeded, FALSE otherwise.
+7:When I do the following, the output is printed in the wrong order:
+
+function myfunc($argument) {
+        echo $argument + 10;
+      }
+      $variable = 10;
+ echo "myfunc($variable) = " . myfunc($variable);
+
+What's going on?
+To be able to use the results of your function in an expression (such as concatenating it with other strings in the example above), you need to return the 
+value, not echo it.
+8:What are the Formatting and Printing Strings available in PHP?
+      
+Function                     Description
+printf()    :                 Displays a formatted string
+sprintf()   :                 Saves a formatted string in a variable
+fprintf()   :                 Prints a formatted string to a file
+number_format()  :   Formats numbers as strings
+9:Explain the types of string comparision function in PHP.
+     
+      Function              Descriptions
+strcmp()             :Compares two strings (case sensitive)
+strcasecmp()      :Compares two strings (not case sensitive)
+strnatcmp(str1, str2) :Compares two strings in ASCII order, but
+                                    any numbers are compared numerically
+strnatcasecmp(str1, str2):Compares two strings in ASCII order, 
+                                          case insensitive, numbers as numbers
+strncasecomp()  : Compares two strings (not case sensitive) 
+                            and allows you to specify how many characters
+                             to compare
+strspn()             : Compares a string against characters represented
+                             by a mask
+strcspn()           : Compares a string that contains characters not in
+                            the mask
+10:Explain soundex() and metaphone().
+      soundex()
+The soundex() function calculates the soundex key of a string. A soundex key is a four character long alphanumeric string that represent English pronunciation of a word. he soundex() function can be used for spelling applications.
+$str = "hello";
+echo soundex($str);
+?>
+metaphone()
+The metaphone() function calculates the metaphone key of a string. A metaphone key represents how a string sounds if said by an English speaking person. The metaphone() function can be used for spelling applications.
+echo metaphone("world");
+?>
+11:What do you mean range()?
+      Starting from a low value and going to a high value, the range() function creates an array of consecutive integer or character values. It takes up to three arguments: a starting value, an ending value, and an increment value. If only two arguments are given, the increment value defaults to 1.
+Example :
+echo range(1,10); // Returns 1,2,3,4,5,6,7,8,9,10
+?>
+12:How to read and display a HTML source from the website url?
+      $filename="http://www.kaptivate.in/";
+$fh=fopen("$filename", "r");
+while( !feof($fh) ){
+$contents=htmlspecialchars(fgets($fh, 1024));
+print "
+$contents
+";
+}
+fclose($fh);
+?>13:What is properties of class?
+Class member variables are called "properties". We may also see them referred to using other terms such as "attributes" or "fields", but for the purposes of this reference we will use "properties". They are defined by using one of the keywords public, protected, or private, followed by a normal variable declaration. This declaration may include an initialization, but this initialization must be a constant value that is, it must be able to be evaluated at compile time and must not depend on run-time information in order to be evaluated.
+14:How to use HTTP Headers inside PHP? Write the statement through which it can be added?
+                HTTP headers can be used in PHP by redirection which is written as:
+The headers can be added to HTTP response in PHP using the header(). The response headers are sent before any actual response being sent. The HTTP headers have to be sent before taking the output of any data. The statement above gets included at the top of the script.
+15:Why we used PHP?
+Because of several main reason we have to use PHP. These are:
+1.PHP runs on many different platforms like that Unix,Linux and Windows etc.
+2.It codes and software are free and easy to download.
+3.It is secure because user can only aware about output doesn't know how that comes.
+4.It is fast,flexible and reliable.
+5.It supports many servers like: Apache,IIS etc.
+16:Arrays  in PHP?
+ Create array in PHP to solved out the problem of writing same variable name many time.In this we create a array of variable name and enter the similar variables in terms of element.Each element in array has a unique key.Using that key we can easily access the wanted element.Arrays are essential for storing, managing and operating on sets of variables effectively. Array are of three types:
+1.Numeric array 
+2.Associative array
+3.Multidimensional array 
+ Numeric array is used to create an array with a unique key.Associative array is used to create an array where each unique key is associated with their value.Multidimensional array is used when we declare multiple arrays in an array.
+17:What is foreach loop in  php?
+foreach:Uses, When When we want execute a block of code for each element in an array.
+Syntax:
+foreach (array as value)
+{
+    code will be executed;
+}
+eg:
+$arr=array("one", "two", "three");
+foreach ($arr as $value)
+{
+  echo "Value: " . $value . "
+";
+}
+?> 
+18:How we used $_get and $_post variable in PHP?
+   We know that when we use $_GET variable all data_values are display on our URL.So,using this we don't have to send secret data (Like:password, account code).But using we can bookmarked the importpage.
+ We use $_POST variable when we want to send data_values without display on URL.And their is no limit to send particular amount of character.
+Using this we can not bookmarked the page.
+19:Why we use $_REQUEST variable?
+We use $_REQUEST variable in PHP to collect the data_values from $_GET,$_POST and $_COOKIE variable.
+Example:
+R4R Welcomes You .
+
+You are years old! 
+20:How we handle errors in PHP?Explain it?
+In PHP we can handle errors easily.Because when error comes it gives error line with their respective line and send error message to the web browser.
+When we creating any web application and scripts. We should handle errors wisely.Because when this not handle properly it can make bg hole in security.
+In PHP we handle errors by using these methods:
+1.Simple "die()" statements
+2.Custom errors and error triggers
+3.Error reporting
+21: How we use Custom errors and error triggers error handling method in PHP?
+In Custom errors and error triggers,we handle errors by 
+using self made functions.
+1.Custom errors : By using this can handle the multiple 
+errors that gives multiple message.
+Syntax:
+set_error_handler(\\\"Custom_Error\\\"); 
+In this syntax if we want that our error handle, handle
+only one error than we write only one argument otherwise
+for handle multiple errors we can write multiple arguments.
+
+Example:
+//function made to handle errorfunction 
+custom_Error($errorno, $errorstr)  
+{   
+   echo \\\"Error: [$errorno] $errorstr\\\";  }
+//set error handler like that
+set_error_handler(\\\"custom_Error\\\");
+//trigger to that error
+echo($verify);?>
+
+2.error trigger : In PHP we use error trigger to handle
+those kind of error when user enter some input data.If 
+data has an error than handle by error trigger function.
+Syntax:
+
+$i=0;if ($i<=1)
+{
+trigger_error(\\\"I should be greater than 1 \\\");
+}
+?> 
+In this trigger_error function generate error when i is
+less than or greater than 1.
+22:What do you understand about Exception Handling in PHP?
+In PHP 5 we introduce a Exception handle to handle run time exception.It is used to change the normal flow of the code execution if a specified error condition occurs.
+An exception can be thrown, and caught("catched") within PHP. Write code in try block,Each try must have at least one catch block. Multiple catch blocks can be used to catch different classes of exceptions. 
+Some error handler methods given below:
+1.Basic use of Exceptions
+2.Creating a custom exception handler
+3.Multiple exceptions
+4.Re-throwing an exception
+5.Setting a top level exception handler
+23: What is the difference b/n 'action' and 'target' in form tag?
+Action: 
+    Action attribute specifies where to send the form-data when
+a form is submitted.
+    Syntax: 
+    Example: 
+action="formValidation.php">
+Target:
+    The target attribute specifies where to open the action URL.
+     Syntax: 
+        Value:
+         _blank – open in new window
+        _self- Open in the same frame as it was clicked
+        _parent- Open in the parent frameset
+        _top- Open in the full body of the window
+        Framename- Open in a named frame24:What do you understand about PHP accelerator ? 
+Basically PHP accelerator is used to boost up the performance of PHP programing language.We use PHP accelerator to reduce the server load and also use to enhance the performance of PHP code near about 2-10 times.In one word we can say that PHP accelertator is code optimization technique. 
+26:How we use ceil() and floor() function in PHP?
+ceil() is use to find nearest maximum values of passing value.
+Example:
+$var=6.5;
+$ans_var=ceil($var);
+echo $ans_var;
+Output:
+7
+floor() is use to find nearest minimum values of passing value.
+Example:
+$var=6.5
+$ans_var=floor($var);
+echo $ans_var;  
+Output:
+6
+27:What is the answer of following code
+echo 1< 2 and echo 1 >2 ?
+
+Output of the given code are given below:
+echo 1<2
+output: 1
+echo 1>2
+output: no output
+28: What is the difference b/w isset and empty? 
+The main difference b/w isset and empty are given below:
+isset: This variable is used to handle functions and checked a variable is set even through it is empty.
+empty: This variable is used to handle functions and checked either variable has a value or it is an empty string,zero0 or not set at all.
+
