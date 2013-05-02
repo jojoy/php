@@ -1,228 +1,403 @@
-php interview questions and answers for experienced
-1:What is the value of $b in the following code?
-    $a="5 USD";
-    $b=10+$a;
-    echo $b;
-?>
 
-Ans:15
-2:What are the differences between Get and post methods in form submitting, give the case where we can use get and we can use post methods?
-  In the get method the data made available to the action page ( where data is received ) by the URL so data can be seen in the address bar. Not advisable if you are sending login info like password etc.
-
-In the post method the data will be available as data blocks and not as query string. 
-3:What is GPC?
-G – Get
-P – Post
-C – Cookies 
-4:What are super global arrays?
-All variables that come into PHP arrive inside one of several special arrays known collectively as the superglobals. They're called superglobal because they are available everywhere in your script, even inside classes and functions.
-5:Give some example for super global arrays?
-$GLOBALS
-$_GET
-$_POST
-$_SESSION
-$_COOKIE
-$_REQUEST
-$_ENV
-$_SERVER
-6:What's the difference between COPY OF A FILE & MOVE_UPLOAD_FILE in file uploading?
-
-MOVE_UPLOAD_FILE :   This function checks to ensure that the file designated by filename is a valid upload file (meaning that it was uploaded via PHP's HTTP POST upload mechanism). If the file is valid, it will be moved to the filename given by destination.
-If filename is not a valid upload file, then no action will occur, and move_uploaded_file() will return FALSE.
-Copy :Makes a copy of a file. Returns TRUE if the copy succeeded, FALSE otherwise.
-7:When I do the following, the output is printed in the wrong order:
-
-function myfunc($argument) {
-        echo $argument + 10;
-      }
-      $variable = 10;
- echo "myfunc($variable) = " . myfunc($variable);
-
-What's going on?
-To be able to use the results of your function in an expression (such as concatenating it with other strings in the example above), you need to return the 
-value, not echo it.
-8:What are the Formatting and Printing Strings available in PHP?
-      
-Function                     Description
-printf()    :                 Displays a formatted string
-sprintf()   :                 Saves a formatted string in a variable
-fprintf()   :                 Prints a formatted string to a file
-number_format()  :   Formats numbers as strings
-9:Explain the types of string comparision function in PHP.
-     
-      Function              Descriptions
-strcmp()             :Compares two strings (case sensitive)
-strcasecmp()      :Compares two strings (not case sensitive)
-strnatcmp(str1, str2) :Compares two strings in ASCII order, but
-                                    any numbers are compared numerically
-strnatcasecmp(str1, str2):Compares two strings in ASCII order, 
-                                          case insensitive, numbers as numbers
-strncasecomp()  : Compares two strings (not case sensitive) 
-                            and allows you to specify how many characters
-                             to compare
-strspn()             : Compares a string against characters represented
-                             by a mask
-strcspn()           : Compares a string that contains characters not in
-                            the mask
-10:Explain soundex() and metaphone().
-      soundex()
-The soundex() function calculates the soundex key of a string. A soundex key is a four character long alphanumeric string that represent English pronunciation of a word. he soundex() function can be used for spelling applications.
-$str = "hello";
-echo soundex($str);
-?>
-metaphone()
-The metaphone() function calculates the metaphone key of a string. A metaphone key represents how a string sounds if said by an English speaking person. The metaphone() function can be used for spelling applications.
-echo metaphone("world");
-?>
-11:What do you mean range()?
-      Starting from a low value and going to a high value, the range() function creates an array of consecutive integer or character values. It takes up to three arguments: a starting value, an ending value, and an increment value. If only two arguments are given, the increment value defaults to 1.
-Example :
-echo range(1,10); // Returns 1,2,3,4,5,6,7,8,9,10
-?>
-12:How to read and display a HTML source from the website url?
-      $filename="http://www.kaptivate.in/";
-$fh=fopen("$filename", "r");
-while( !feof($fh) ){
-$contents=htmlspecialchars(fgets($fh, 1024));
-print "
-$contents
-";
+58:What is the use of “Final class” and can a final class be an abstract?
+The “Final” keyword is used to make the class uninheritable. So the class or it’s methods can not be overridden.
+final class Class1 {
+    // ...
 }
-fclose($fh);
-?>13:What is properties of class?
-Class member variables are called "properties". We may also see them referred to using other terms such as "attributes" or "fields", but for the purposes of this reference we will use "properties". They are defined by using one of the keywords public, protected, or private, followed by a normal variable declaration. This declaration may include an initialization, but this initialization must be a constant value that is, it must be able to be evaluated at compile time and must not depend on run-time information in order to be evaluated.
-14:How to use HTTP Headers inside PHP? Write the statement through which it can be added?
-                HTTP headers can be used in PHP by redirection which is written as:
-The headers can be added to HTTP response in PHP using the header(). The response headers are sent before any actual response being sent. The HTTP headers have to be sent before taking the output of any data. The statement above gets included at the top of the script.
-15:Why we used PHP?
-Because of several main reason we have to use PHP. These are:
-1.PHP runs on many different platforms like that Unix,Linux and Windows etc.
-2.It codes and software are free and easy to download.
-3.It is secure because user can only aware about output doesn't know how that comes.
-4.It is fast,flexible and reliable.
-5.It supports many servers like: Apache,IIS etc.
-16:Arrays  in PHP?
- Create array in PHP to solved out the problem of writing same variable name many time.In this we create a array of variable name and enter the similar variables in terms of element.Each element in array has a unique key.Using that key we can easily access the wanted element.Arrays are essential for storing, managing and operating on sets of variables effectively. Array are of three types:
-1.Numeric array 
-2.Associative array
-3.Multidimensional array 
- Numeric array is used to create an array with a unique key.Associative array is used to create an array where each unique key is associated with their value.Multidimensional array is used when we declare multiple arrays in an array.
-17:What is foreach loop in  php?
-foreach:Uses, When When we want execute a block of code for each element in an array.
-Syntax:
-foreach (array as value)
-{
-    code will be executed;
+class FatalClass extends Class1 {
+    // ...
 }
-eg:
-$arr=array("one", "two", "three");
-foreach ($arr as $value)
-{
-  echo "Value: " . $value . "
-";
+ $out= new FatalClass();
+An Abstract class will never be a final class as an abstract class must be extendable.
+59:What are the two new error levels introduced in PHP5.3?
+      E_DEPRECATEDThe E_DEPRECATED error level is used to indicate that a function or feature has been deprecated.E_USER_DEPRECATED
+The E_USER_DEPRECATED level is intended for indicating deprecated features in user code, similarly to the E_USER_ERROR and E_USER_WARNING levels.
+60:Where is the sessions are stored?
+      Sessions are stored in server side and it is accessed by a unique id which is known as the session-id where each user/visitor is assigned when they access your website.
+61:How the session-id is propagated within your website?
+Basically, there are 2 methods either store it in a cookie or propagated in the URL.
+
+62:which of the following will not combine string $s1 and $s2 into a single string?
+$s1 = 'a';
+$s2 = 'b';
+A. $s1 + $s2
+B. "{$s1}{$s2}"
+C. $s1.$s2
+D. implode('', array($s1,$s2))
+E. All of the above combine the strings
+You can not concatenate 2 string using “+”. The answer will be “0″; so here the answer is A.
+
+63:Consider the following script. What line of code should be inserted in the marked location in order to display the string php when this script is executed?$alpha = 'abcdefghijklmnopqrstuvwxyz';
+$letters = array(15, 7, 15);
+foreach($letters as $val) {
+/* What should be here */
 }
+A. echo chr($val);
+B. echo asc($val);
+C. echo substr($alpha, $val, 2);
+D. echo $alpha{$val};
+E. echo $alpha{$val+1}
+
+An array can be accessed like this as well. $alpha{$val}  
+64:Using variable interpolation how we can print the following String?
+
+“I am visiting the php interview questions website”.
+The word “question” is inside a variable,
+$a = ‘question’;
+Answer is just,
+echo “I am visiting the php interview {$a}s website”;
+
+strings and variable interpolation
+Basically there are 2 methods how we can define strings,
+- Simple strings
+- Complex strings
+ 65:Which will print correctly in to the browser as “Hello World” followed by a new line.
+
+a) echo “Hello $what\n”;
+b) echo ‘Hello $what\n’;
+$what = “World”;
+
+Is it a) or b) ?
+
+The answer is “a”. That is because simple string will print almost all characters literally, where complex string allows special escape sequences to insert special characters.
+66:What are the steps that you can take to prevent form hijacking/sql injection in PHP?
+Make register_globals to off to prevent Form Injection with malicious data.
+Set Error_reporting to E_ALL so that all variables will be intialized before using them.
+Practice of using htmlentities(), strip_tags(), utf8_decode() and addslashes() for filtering malicious data in php
+Make practice of using mysql_escape_string() in mysql.
+Sql injection ->  is an attack that can be made directly to a database table, where the attacker can edit the original intended sql statement to one of his own. This is caused by lack of unverified or unsanitized user input.
+67:Predefined  classes in php ?
+Directory
+stdClass
+__PHP_Incomplete_Class
+exception
+php_user_filter 
+Directory 
+
+The class from which dir is instantiated.
+stdClass
+Created by typecasting to object.
+__PHP_Incomplete_Class
+Possibly created by unserialize().
+Predefined classes as of PHP 5
+These additional predefined classes were introduced in PHP 5.0.0.
+exception
+php_user_filter
+Closure
+The predefined final class Closure was introduced in PHP 5.3.0. It is used for internal implementation of anonymous functions.
+The class has a constructor forbidding the manual creation of the object (issues E_RECOVERABLE_ERROR) and the __invoke method with the calling magic.
+68:How do we get to know about browser properties?
+     get_browser() attempts to determine the capabilities of the user’s browser. 
+or echo $_SERVER['HTTP_USER_AGENT']]
+69:What is the difference between split() vs explode()?
+    Split() is used to split a string using a regular expression while explode() is used to split a string using another string.
+ 70:What is the method we can use to hold the output to the browser?
+Ob_start(), This will redirect the out put to a buffer until ob_end_flush() or any other out put supportive method will be called.
+ 71:What is the difference between session_register and $_session?
+session_register() is used for register one or more global variables with the current session. While $_SESSION[] array is used for storing one or more variables with in the current session array. session_register() depends upon register_global is enable.
+72:Which is the best way to determine of an array element’s existence?
+array_key_exists()
+It is because isset returns false even though if an array element is defined as a NULL. 
+73:What methods can be used to determine whether an array element exits or not?
+array_key_exist or isset() methods can be used.
+74:How to identify whether a variable contains an array?
+is_array() function can be used.
+75:Which will execute faster POST or GET?.
+       GET transfer data to the server using URL whereas POST transfer data using form collection which is added to the request by the browser. We can send at most 1024 bytes using URL hence there is upper limit for GET method POST method can transfer large amount of data where upper limit is imposed by web server which is about 2MB data is shown to the user in GET method.
+Get is faster but not safe.
+76. How can I make a script that can be bilanguage (supports Eglish, German)?
+         You can change charset variable in above line in the script to support bilanguage
+77:What is a CAPTCHA and when do you use it?  
+       CAPTCHA is the short form of Completely Automated Public Turing Test. It’s a step taken to ensure that a feature is not abused in a way it’s not meant to be used. We use CAPTCHAS for general form submissions, registrations, user generated content etc.
+78:Will comparison of string “10″ and integer 11 work in PHP?
+         Yes, internally PHP will cast everything to the integer type, so numbers 10 and 11 will be compared. 
+79:How can we increase the execution time of a php script?
+         By the use of void set_time_limit(int seconds)
+Set the number of seconds a script is allowed to run. If this is reached, the script returns a fatal error. The default limit is 30 seconds or, if it exists, the max_execution_time value defined in the php.ini. If seconds is set to zero, no time limit is imposed.
+       When called, set_time_limit() restarts the timeout counter from zero. In other words, if the timeout is the default 30 seconds, and 25 seconds into script execution a call such as set_time_limit(20) is made, the script will run for a total of 45 seconds before timing out.
+80:What is the difference between echo and print? 
+echo:
+Is a command only.
+Faster than print
+print:
+Is a function.
+It will return true(1) or false(0) or some values.
+81:Why do we put @ symbol before any variable?
+       @ symbol when placed before any variable will hide notices and warnings  which are generated when trying to access an undefined variable.
+82:How can you avoid execution time out error while fetching record from mysql?
+         set_time_limit -- Limits the maximum execution time. It must be increased.
+set_time_limit(0);If you set to 0 you say that there is not limit.
+83:What do you need to do to improve the performance (speedy execution) for the script you have written?
+       There are many things to be considered.If your application based on Database you should think about re-factoring queries try to use high performance queries (Use EXPLAIN to monitor the amount of records retrieved for each query. You can use UNIQUE LIMITWHERE to filter the no of records returned).And also you should be aware of fine tuning configuration for your needs.
+In PHP you should use native functions instead of aliases. And also you should choose best function for the job. If you are going to do simple string replace use str_replace than ereg_replace. Use is_int() instead ofis_integer().Use DBG or xdebug to profile your scripts find the bottle neck function and try to re factor if possible.
+ 84: What Is a Session?
+     HTTP is a stateless protocol. This means that each
+request is handled independently of all the other
+requests and it means that a server or a script cannot
+remember if a user has been there before. However,
+knowing if a user has been there before is often
+required and therefore something known as cookies
+and sessions have been implemented in order to cope
+with that problem.
+A session is a logical object created by the PHP engine to allow 
+you topreserve data across subsequent HTTP requests.There is 
+only one session object available to your PHP scripts at anytime.
+Data saved to the session by a script can be retrieved by the 
+same script or another script when requested from the same visitor.
+Sessions are commonly used to store temporary data to allow 
+multiplePHP pages to offer a complete functional transaction for the same visitor.
+85 :The Difference Between Cookies and Sessions
+     The main difference between cookies and sessions is that cookies are stored in the user's browser, and sessions are not.
+A cookie can keep information in the user's browser until deleted. If a person has a login and password, this can be set as a cookie in their browser so they do not have to re-login to your website every time they visit. You can store almost anything in a browser cookie. The trouble is that a user can block cookies or delete them at any time. If, for example, your website's shopping cart utilized cookies, and a person had their browser set to block them, then they could not shop at your website. 
+Sessions are not reliant on the user allowing a cookie. They work instead like a token allowing access and passing information while the user has their browser open. The problem with sessions is that when you close your browser you also lose the session. So, if you had a site requiring a login, this couldn't be saved as a session like it could as a cookie, and the user would be forced to re-login every time they visit.
+The Key difference would be cookies are stored in your hard disk whereas a session aren't stored in your hard disk. Sessions are basically like tokens, which are generated at authentication. A session is available as long as the browser is opened.
+Ans2:
+1. Cookies can store only "string" datatype
+2. They are stored at Client side
+3. Cookie is non-secure since stored in text format at
+client side
+4. Cookies may or may not be individual for every
+client
+5. Due to cookies network traffic will increase.Size
+of cookie is limited to 40 and number of cookies to be used
+is restricted to 20.
+6. Only in few situations we can use cookies because
+of no security
+7. We can disable cookies
+8. Since the value is string there is no security
+9. We have persistent and non-persistent cookies
+Session
+1. Session can store any type of data because the
+value is of datatype of "object"
+2. These are stored at Server side
+3. Session are secure because it is stored in binary
+format/encrypted form and it gets decrypted at server
+
+4. Session is independent for every client i.e
+individual for every client
+
+5. There is no limitation on size or number of
+sessions to be used in an application
+
+6. For all conditions/situations we can use sessions
+7. we cannot disable the sessions.Sessions can be used
+without cookies also(by disabling cookies)
+
+8. The disadvantage of session is that it is a
+burden/overhead on server
+
+9. Sessions are called as Non-Persistent cookies
+because its life time can be set manually
+Imp Note:
+        The session ID is stored in two places:on the client using a
+temporary cookie, and on the server in a flat file or a database.
+By using the session ID to put a name to every request
+received, a developer can identify which client initiated which
+request,and track and maintain client-specific information
+in session variables..
+             Typically,  use a session to store values that are
+required over the course of a single visit, and a cookie
+to store more persistent data that is used over multiple visits.
+If you open up two browser windows and request the  same
+page in each one, PHP will maintain and increment individual
+session counters for each browser instance. The session ID is
+used to identify which client made which request, and
+recreate the prior saved environment for each individual session.
+         It’s important to note that the call to session_start()
+must appear first, This is because the PHP session handler
+internally uses in-memory cookies to store session data, and the
+cookie creation headers must be transmitted to the client
+browser before any output.If you ever see an error like
+this in one of your session-enabled pages:
+       Remember that $_SESSION is a superglobal, so you can use
+it inside and outside functions without needing to declare it as
+global first
+85:How session will work?
+    When a user first enters the session-based application by making a request to a page that starts a session, PHP generates a session ID and creates a file that stores the session-related variables. PHP sets a cookie to hold the session ID in the response the script generates. The browser then records the cookie and includes it in subsequent requests.
+Starting a Session
+  PHP provides a session_start( ) function that creates a new session and subsequently identifies and establishes an existing one. Either way, a call to the session_start( ) function initializes a session.
+ The first time a PHP script calls session_start( ), a session identifier is generated, and, by default, a Set-Cookie header field is included in the response.The response sets up a session cookie in the browser with the name PHPSESSID and the value of the session identifier. The PHP session management automatically includes the cookie without the need to call to the setcookie( ) or header( ) functions.
+The session identifier (ID) is a random string of 32 hexadecimal digits, such as fcc17f071bca9bf7f85ca281094390b4. As with other cookies, the value of the session ID is made available to PHP scripts in the $HTTP_COOKIE_VARS associative array and in the $PHPSESSID variable.
+When a new session is started, PHP creates a session file. With the default configuration, session files are written in the /tmp directory using the session identifier, prefixed with sess_, for the filename. The filename associated with our example session ID is /tmp/sess_fcc17f071bca9bf7f85ca281094390b4.
+ Using Session Variables
+    Variables need to be registered with the session_register( ) function that's used in a session. If a session has not been initialized, the session_register( ) function calls session_start( ) to open the session file. Variables can be registered -- added to the session file -- with the session_register( ) call as follows:
+session_register("foo");
+$foo = "bar"
+Note that it is the name of the variable that is passed to the session_register( ) function, not the variable itself. Once registered, session variables are made persistent and are available to scripts that initialize the session. PHP tracks the values of session variables and saves their values to the session file: there is no need to explicitly save a session variable before a script ends. In the previous example, the variable $foo is automatically saved in the session store with its value bar.
+Variables can be removed from a session with the session_unregister( ) function call; 
+Ending a Session
+At some point in an application, sessions may need to be destroyed. For example, when a user logs out of an application, a call to the session_destroy( ) function can be made. A call to session_destroy( ) removes the session file from the system but doesn't remove the PHPSESSID cookie from the browser
+Boolean session_is_registered(string variable_name)
+Returns true if the named variable has been registered with the current session and false otherwise. Using this function to test if a variable is registered is a useful way to determine if a script has created a new session or initialized an existing one.  
+ session_unset( )
+Unsets the values of all session variables. This function doesn't unregister the actual session variables. A call to session_is_registered( ) still returns true for the session variables that have been unset.
+Security issues
+     Because the cookies are transferred unencrypted (unless you are using SSL) and because they will be stored in plain text on the client computer, it is not advised that you store any sensitive information in the cookies.a malicious user will be able to execute any arbitrary Javascript code on the client machine without the user or you knowing it. The reason why this is a problem regarding cookie and session security is that cookies will be default be able to be viewed by Javascript.
+here are a number of different ways you could deal with this. The first and most obvious one is to properly escape all output coming from a user. The function htmlentities() can take care of that. Another way is by setting the httponly parameter for your cookies. In that way the browser will not give Javascript access to the information that cookie holds.
+If you are using sessions, then you can call session_regenerate_id() on every request. By doing that the user will get a new session ID each time and it means that if a malicious user ever gets a session id, chances are it will be invalid by the time he gets to try it because it changes often. 
+
+85:How do I find out the number of parameters passed into function. ?
+ func_num_args() function returns the number of parameters passed in.
+86:How to set cookies?
+setcookie('variable','value','time');
+variable - name of the cookie variable
+value - value of the cookie variable
+time - expiry time
+Example: setcookie('Test',$i,time()+3600);
+Test - cookie variable name
+$i - value of the variable 'Test'
+time()+3600 - denotes that the cookie will expire after an one hour 
+87: what is Magic methods in php?
+_construct( ):Called when instantiating an object
+__destruct( ):Called when deleting an object
+__get( ):Called when reading from a nonexistent property
+__set( ):Called when writing to a nonexistent property
+__call( ):Called when invoking a nonexistent method
+__toString( ):Called when printing an object (for eg:  converting an object to strings)
+__clone( ):Called when cloning an object (copying object) 
+88:Explain Constructors and Destructors in php?
+__construct( )
+Called when instantiating an object
+
+__destruct( )
+Called when deleting an object
+
+
+Constructors and destructors are functions that are called when a new instance of an object is created (constructors) and/or destroyed (destructors). Their 
+
+primary purpose is to allow for a means to initialize and clean up after an object during its use.
+Constructors can accept parameters, which are assigned to specific object fields at
+creation time.
+
+Constructors can call class methods or other functions.
+constructors are intuitively useful for initializing class properties,
+
+Class constructors can call on other constructors, including those from the class parent.
+
+One classic example is a class to access a database back end, where a constructor could make the connection to the database while the destructor closes it.
+
+PHP 4  Constructors
+In PHP 4, only constructors were available and were created by defining a function whose name was the same as the class itself:
+
+     class MyClass {
+          function MyClass($param) {
+               echo "Created a new instance of MyClass !";
+          }
+     }
+     $Myinstance = new MyClass;
+?>
+
+In PHP 5, this concept has been changed PHP 5 or (5>=) now uses a unified constructor function named __construct(). PHP 5 or (5>=) also uses a unified 
+
+__destruct() method for its destructors.
+
+PHP 5 Constructors and Destructors
+
+
+     class MyClass {
+          function __construct($p) {
+               echo "Created a new instance of MyClass!";
+          }
+          function __destruct() {
+               echo "Destroyed this instance of MyClass";
+          }
+     }
+     $Myinstance = new MyClass("value");
+    
+?>
+89:How many HTTP headers will send to a web page(client side) from server when you use sessions  (session_start()) in php ?
+   
+There are three HTTP headers included in the response:
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+90:what are the advantages of storing sessions in database? 
+If you store a session in a database you have several advantages:
+
+@ Improving the security because on many hosting packages (shared host)
+PHP uses the same path for storing sessions for all the users,
+somewhere that is not in your folders.
+@ You can track who is online etc.
+@ For application that are running on multiple servers, you can store
+all the session data in one database.
+The real beauty of this approach is that you don't have to modify your code or the way you use sessions in any way. $_SESSION still exists and behaves the 
+same way, PHP still takes care of generating and propagating the session identifier, and changes made to session configuration directives still apply. All 
+you have to do is call this one function.
+You must call session_set_save_handler() prior to calling session_start(), but you can define the functions themselves anywhere.
+The function is called session_set_save_handler(), and it takes six arguments,
+
+1. Opening the session data store
+2. Closing the session data store
+3. Reading session data
+4. Writing session data
+5. Destroying all session data
+6. Cleaning out old session data
+91: what are the security tips you should know before developing php/mysql web pages ?
+ 1. Do not trust user input.
+2. Validate user input on the server side.
+3. Do not use user input directly in your MySQL queries.
+4. Don't put integers in quotes In your MySQL queries.
+5. Always escape the output using php built in functions.
+6. When uploading files, validate the file mime type using php.
+7. If you are using 3rd party code libraries, be sure to keep them up to date.
+8. Give your database users just enough permissions.
+9. Do not allow hosts other than localhost to connect to your database.
+10. Your library file extensions should be PHP.
+11. Have register globals off or define your variables first
+12. Keep PHP itself up to date (use latest version php5 or above) 
+92:What is curl?  
+CURL is Client URL Library. u need the libcurl package in the server 
+PHP supports libcurl, a library created by Daniel Stenberg, that allows you to connect and communicate to many different types of servers with many different types of protocols. libcurl currently supports the http, https, ftp, gopher, telnet, dict, file, and ldap protocols. libcurl also supports HTTPS certificates, HTTP POST, HTTP PUT, FTP uploading (this can also be done with PHP's ftp extension), HTTP form based upload, proxies, cookies, and user+password authentication.
+93:How will u initialize a curl session? 
+curl_init() - parameter source URL
+curl_setopt(),
+curl_exec(),
+curl_close()
+See also,
+curl_multi_init  ( void  )
+curl_multi_add_handle($mh,$ch1);
+94:what is GD?
+PHP is not limited to creating just HTML output. It can also be used to create and manipulate image files in a variety of different image formats, includinggif, png, jpg, wbmp, and xpm. Even more convenient, PHP can output image streams directly to a browser. You will need to compile PHP with the GD library ofimage functions for this to work. GD and PHP may also require other libraries, depending on which image formats you want to work with.
+95:How can I send variables from a PHP script to another URL using POST without using forms and hidden variables?
+You can open an HTTP socket connection and send HTTP POST commands. Here is
+an example :
+// Generate the request header 
+$ReqHeader = 
+"POST $URI HTTP/1.1n". 
+"Host: $Hostn". 
+"Content-Type: application/x-www-form-urlencodedn". 
+"Content-Length: $ContentLengthnn". 
+"$ReqBodyn"; 
+// Open the connection to the host 
+$socket = fsockopen($Host, 80, &$errno, &$errstr); 
+if (!$socket) 
+
+$Result["errno"] = $errno; 
+$Result["errstr"] = $errstr; 
+return $Result; 
+} 
+$idx = 0; 
+fputs($socket, $ReqHeader); 
+while (!feof($socket)) 
+
+$Result[$idx++] = fgets($socket, 128); 
+} 
+//------------------------------------------- 
 ?> 
-18:How we used $_get and $_post variable in PHP?
-   We know that when we use $_GET variable all data_values are display on our URL.So,using this we don't have to send secret data (Like:password, account code).But using we can bookmarked the importpage.
- We use $_POST variable when we want to send data_values without display on URL.And their is no limit to send particular amount of character.
-Using this we can not bookmarked the page.
-19:Why we use $_REQUEST variable?
-We use $_REQUEST variable in PHP to collect the data_values from $_GET,$_POST and $_COOKIE variable.
-Example:
-R4R Welcomes You .
-
-You are years old! 
-20:How we handle errors in PHP?Explain it?
-In PHP we can handle errors easily.Because when error comes it gives error line with their respective line and send error message to the web browser.
-When we creating any web application and scripts. We should handle errors wisely.Because when this not handle properly it can make bg hole in security.
-In PHP we handle errors by using these methods:
-1.Simple "die()" statements
-2.Custom errors and error triggers
-3.Error reporting
-21: How we use Custom errors and error triggers error handling method in PHP?
-In Custom errors and error triggers,we handle errors by 
-using self made functions.
-1.Custom errors : By using this can handle the multiple 
-errors that gives multiple message.
-Syntax:
-set_error_handler(\\\"Custom_Error\\\"); 
-In this syntax if we want that our error handle, handle
-only one error than we write only one argument otherwise
-for handle multiple errors we can write multiple arguments.
-
-Example:
-//function made to handle errorfunction 
-custom_Error($errorno, $errorstr)  
-{   
-   echo \\\"Error: [$errorno] $errorstr\\\";  }
-//set error handler like that
-set_error_handler(\\\"custom_Error\\\");
-//trigger to that error
-echo($verify);?>
-
-2.error trigger : In PHP we use error trigger to handle
-those kind of error when user enter some input data.If 
-data has an error than handle by error trigger function.
-Syntax:
-
-$i=0;if ($i<=1)
-{
-trigger_error(\\\"I should be greater than 1 \\\");
-}
-?> 
-In this trigger_error function generate error when i is
-less than or greater than 1.
-22:What do you understand about Exception Handling in PHP?
-In PHP 5 we introduce a Exception handle to handle run time exception.It is used to change the normal flow of the code execution if a specified error condition occurs.
-An exception can be thrown, and caught("catched") within PHP. Write code in try block,Each try must have at least one catch block. Multiple catch blocks can be used to catch different classes of exceptions. 
-Some error handler methods given below:
-1.Basic use of Exceptions
-2.Creating a custom exception handler
-3.Multiple exceptions
-4.Re-throwing an exception
-5.Setting a top level exception handler
-23: What is the difference b/n 'action' and 'target' in form tag?
-Action: 
-    Action attribute specifies where to send the form-data when
-a form is submitted.
-    Syntax: 
-    Example: 
-action="formValidation.php">
-Target:
-    The target attribute specifies where to open the action URL.
-     Syntax: 
-        Value:
-         _blank – open in new window
-        _self- Open in the same frame as it was clicked
-        _parent- Open in the parent frameset
-        _top- Open in the full body of the window
-        Framename- Open in a named frame24:What do you understand about PHP accelerator ? 
-Basically PHP accelerator is used to boost up the performance of PHP programing language.We use PHP accelerator to reduce the server load and also use to enhance the performance of PHP code near about 2-10 times.In one word we can say that PHP accelertator is code optimization technique. 
-26:How we use ceil() and floor() function in PHP?
-ceil() is use to find nearest maximum values of passing value.
-Example:
-$var=6.5;
-$ans_var=ceil($var);
-echo $ans_var;
-Output:
-7
-floor() is use to find nearest minimum values of passing value.
-Example:
-$var=6.5
-$ans_var=floor($var);
-echo $ans_var;  
-Output:
-6
-27:What is the answer of following code
-echo 1< 2 and echo 1 >2 ?
-
-Output of the given code are given below:
-echo 1<2
-output: 1
-echo 1>2
-output: no output
-28: What is the difference b/w isset and empty? 
-The main difference b/w isset and empty are given below:
-isset: This variable is used to handle functions and checked a variable is set even through it is empty.
-empty: This variable is used to handle functions and checked either variable has a value or it is an empty string,zero0 or not set at all.
-
+Or you can use the cURL extensions for PHP (http://curl.haxx.se). Once you build it and compile their support into PHP, it is fairly easy to do posting stuff (even over https):
+$URL="www.mysite.com/test.php"; 
+$ch = curl_init();    
+curl_setopt($ch, CURLOPT_URL,"https://$URL");  
+curl_setopt($ch, CURLOPT_POST, 1); 
+curl_setopt($ch, CURLOPT_POSTFIELDS, "Data1=blah&Data2=blah");curl_exec ($ch);     
+curl_close ($ch); 
+?>
+This will have the net effect of posting your data to the $URL site, without any header hacking.
+You can also do other nifty things with cURL, like retrieve the HTML into variables and scrape through it for neat functionality.
+95: How to count number of parameters given in URL by POST?
+echo count ($_POST);
+?>
+95:How to output a number with leading zero's?
+$number = 15;
+printf("%05d", $number);
+?>
